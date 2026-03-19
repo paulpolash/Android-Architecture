@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         initVariable()
+        initFunctionality()
 
 
 //        enableEdgeToEdge()
@@ -36,7 +37,9 @@ class MainActivity : ComponentActivity() {
 //            }
 //        }
     }
+    private fun initFunctionality(){
 
+    }
     private fun initVariable() {
         viewModel = ViewModelProvider(this)[UserViewModel::class.java]
         viewModel.users.observe(this) { users ->
