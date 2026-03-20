@@ -1,14 +1,12 @@
 package com.example.androidarchitecture.data.repository
 
 import com.example.androidarchitecture.data.model.User
+import com.example.androidarchitecture.data.model.Users
+import com.example.androidarchitecture.data.remote.ApiService
+import com.example.androidarchitecture.data.remote.RetrofitInstance
 
-class UserRepository {
+class UserRepository(private val apiService: ApiService = RetrofitInstance.api) {
     suspend fun getUsers(): List<User>{
-        return listOf(
-            User(1, "Polash"),
-            User(2, "Premcaitanya"),
-            User(3, "Pran"),
-            User(4, "Das"),
-        )
+        return apiService.getUsers()
     }
 }

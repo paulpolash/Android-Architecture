@@ -43,7 +43,10 @@ class MainActivity : ComponentActivity() {
     private fun initVariable() {
         viewModel = ViewModelProvider(this)[UserViewModel::class.java]
         viewModel.users.observe(this) { users ->
-            Log.d("TAG", users.toString())
+            users.forEach{
+
+                Log.d("TAG", it.name+" - "+it.email)
+            }
         }
         viewModel.fetchData()
     }
