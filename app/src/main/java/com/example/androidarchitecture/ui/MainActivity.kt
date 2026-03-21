@@ -49,6 +49,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         viewModel.fetchData()
+        viewModel.createPost()
     }
 }
 //@Composable
