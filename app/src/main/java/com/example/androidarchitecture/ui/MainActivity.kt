@@ -41,7 +41,9 @@ class MainActivity : ComponentActivity() {
 
     }
     private fun initVariable() {
-        viewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        viewModel = ViewModelProvider(this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        ).get(UserViewModel::class.java)
         viewModel.users.observe(this) { users ->
             users.forEach{
 
@@ -50,6 +52,12 @@ class MainActivity : ComponentActivity() {
         }
         viewModel.fetchData()
         viewModel.createPost()
+
+//        viewModel.getUsers.observe(this){data->
+//            data.forEach{
+//                Log.d("Data", it.name)
+//            }
+//        }
     }
 }
 //@Composable

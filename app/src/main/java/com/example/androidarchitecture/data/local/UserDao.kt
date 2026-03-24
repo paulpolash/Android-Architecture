@@ -13,5 +13,5 @@ interface UserDao {
     suspend fun insertUsers(users: List<Users>)
 
     @Query("SELECT * FROM Users")
-    fun getAllUsers():LiveData<List<Users>>
+    fun getAllUsers():List<Users>
 }
