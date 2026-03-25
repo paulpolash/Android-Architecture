@@ -17,9 +17,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
-    private val userRepository= UserRepository(
-        dao = AppDatabase.getDatabase(application).userDao()
-    )
+    private val userRepository by lazy {
+        UserRepository(
+            dao = AppDatabase.getDatabase(application).userDao()
+        )
+    }
+//    private val userRepository= UserRepository(
+//        dao = AppDatabase.getDatabase(application).userDao()
+//    )
     private val _users = MutableLiveData<List<User>>()
     val users : LiveData<List<User>> = _users
 

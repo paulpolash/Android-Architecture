@@ -53,11 +53,12 @@ class MainActivity : ComponentActivity() {
         viewModel.fetchData()
         viewModel.createPost()
 
-//        viewModel.getUsers.observe(this){data->
-//            data.forEach{
-//                Log.d("Data", it.name)
-//            }
-//        }
+        viewModel.getUsers.observe(this){data->
+            data.forEach{
+                Log.d("Data", it.name)
+            }
+        }
+        viewModel.insertAndFetchData()
     }
 }
 //@Composable
