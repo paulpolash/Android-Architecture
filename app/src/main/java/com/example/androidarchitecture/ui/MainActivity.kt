@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
     private fun initVariable() {
         viewModel = ViewModelProvider(this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get(UserViewModel::class.java)
+        )[UserViewModel::class.java]
         viewModel.users.observe(this) { users ->
             users.forEach{
 
