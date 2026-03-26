@@ -61,6 +61,5 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
                 Log.d("Post", result.toString())
             }
         }
-
     }
 }
