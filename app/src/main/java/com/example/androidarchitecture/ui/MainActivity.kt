@@ -46,7 +46,6 @@ class MainActivity : ComponentActivity() {
         )[UserViewModel::class.java]
         viewModel.users.observe(this) { users ->
             users.forEach{
-
                 Log.d("TAG", it.name+" - "+it.email)
             }
         }
