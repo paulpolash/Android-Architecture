@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidarchitecture.data.local.AppDatabase
 import com.example.androidarchitecture.data.model.CreatePostRequest
+import com.example.androidarchitecture.data.model.Person
 import com.example.androidarchitecture.data.model.User
 import com.example.androidarchitecture.data.model.Users
 import com.example.androidarchitecture.data.repository.UserRepository
@@ -25,8 +26,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 //    private val userRepository= UserRepository(
 //        dao = AppDatabase.getDatabase(application).userDao()
 //    )
-    private val _users = MutableLiveData<List<User>>()
-    val users : LiveData<List<User>> = _users
+    private val _users = MutableLiveData<List<Person>>()
+    val users : LiveData<List<Person>> = _users
 
     fun fetchData(){
         viewModelScope.launch(Dispatchers.IO) {
@@ -38,12 +39,15 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     }
     private val allUsers = MutableLiveData<List<Users>>()
     val getUsers : LiveData<List<Users>> = allUsers
+
+    private val allPerson = MutableLiveData<List<Person>>()
+    val personsData : LiveData<List<Person>> = allPerson
     fun insertAndFetchData(){
         viewModelScope.launch(Dispatchers.IO) {
             userRepository.fetchAndSaveUsers()
-            val data = userRepository.getInsertedData()
+            val data = userRepository.getPersonData()
             withContext(Dispatchers.Main) {
-                allUsers.value = data
+                allPerson.value = data
             }
         }
     }
