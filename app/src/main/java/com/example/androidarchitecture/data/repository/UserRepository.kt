@@ -1,5 +1,6 @@
 package com.example.androidarchitecture.data.repository
 
+import androidx.lifecycle.LiveData
 import com.example.androidarchitecture.data.local.UserDao
 import com.example.androidarchitecture.data.model.CreatePostRequest
 import com.example.androidarchitecture.data.model.Person
@@ -18,10 +19,10 @@ class UserRepository(private val dao: UserDao) {
     }
 
     val users: List<Users> = dao.getAllUsers()
-    val persons: List<Person> = dao.getAllPerson()
     suspend fun getInsertedData(): List<Users>{
         return users
     }
+    val persons: List<Person> = dao.getAllPerson()
     suspend fun getPersonData(): List<Person>{
         return persons
     }

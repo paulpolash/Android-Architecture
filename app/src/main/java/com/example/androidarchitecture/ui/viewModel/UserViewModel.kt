@@ -51,6 +51,9 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             }
         }
     }
+    fun getPersonById(personId: Int): Person ?{
+        return personsData.value?.find { it.id == personId }
+    }
 
     fun createPost(){
         viewModelScope.launch(Dispatchers.IO) {

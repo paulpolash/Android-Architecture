@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.compose.rememberNavController
+import com.example.androidarchitecture.ui.navigation.NavGraph
 import com.example.androidarchitecture.ui.screen.PersonData
 import com.example.androidarchitecture.ui.theme.AndroidArchitectureTheme
 import com.example.androidarchitecture.ui.viewModel.UserViewModel
@@ -23,7 +25,9 @@ class MainActivity : ComponentActivity() {
 //        enableEdgeToEdge()
         setContent {
             AndroidArchitectureTheme {
-                PersonData(viewModel)
+                val navHostController = rememberNavController()
+                NavGraph(navHostController = navHostController, viewModel = viewModel)
+//                PersonData(viewModel)
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    Greeting(
 //                        name = "Polash",
