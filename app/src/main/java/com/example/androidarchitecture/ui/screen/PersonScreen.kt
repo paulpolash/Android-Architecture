@@ -17,6 +17,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -26,11 +27,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.androidarchitecture.data.model.Person
 import com.example.androidarchitecture.ui.navigation.Routes
+import com.example.androidarchitecture.ui.viewModel.PersonViewModel
 import com.example.androidarchitecture.ui.viewModel.UserViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersonData(navHostController: NavHostController, viewModel: UserViewModel){
-    val state by viewModel.personsData.observeAsState(emptyList())
+fun PersonData(navHostController: NavHostController, viewModel: PersonViewModel){
+//    val state by viewModel.personsData.observeAsState(emptyList())//it will be used when we use UserViewModel
+    val state by viewModel.personsData.collectAsState(emptyList())
     Scaffold(
         topBar = {
             TopAppBar(
@@ -75,7 +78,8 @@ fun PersonHeader(person: Person, navHostController: NavHostController){
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersonDetail(person: Person?){
+fun PersonDetail( personId: Int, personViewModel: PersonViewModel){
+    val person by personViewModel.getPersonById(personId).collectAsState()
     Scaffold(
         topBar = {
             TopAppBar(

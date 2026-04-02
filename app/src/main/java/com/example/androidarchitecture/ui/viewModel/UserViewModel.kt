@@ -44,11 +44,16 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     val personsData : LiveData<List<Person>> = allPerson
     fun insertAndFetchData(){
         viewModelScope.launch(Dispatchers.IO) {
-            userRepository.fetchAndSaveUsers()
-            val data = userRepository.getPersonData()
-            withContext(Dispatchers.Main) {
-                allPerson.value = data
-            }
+            try{
+                userRepository.fetchAndSaveUsers()
+//                val data = userRepository.getPersonData()
+//                withContext(Dispatchers.Main) {
+//                    allPerson.value = data
+//                }
+            }catch (e: Exception){
+                Log.e("API_ERROR", e.message.toString())
+
+        }
         }
     }
     fun getPersonById(personId: Int): Person ?{

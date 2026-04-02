@@ -6,20 +6,25 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.androidarchitecture.ui.screen.PersonData
 import com.example.androidarchitecture.ui.screen.PersonDetail
+import com.example.androidarchitecture.ui.viewModel.PersonViewModel
 import com.example.androidarchitecture.ui.viewModel.UserViewModel
 
 @Composable
-fun NavGraph(navHostController: NavHostController, viewModel: UserViewModel) {
+fun NavGraph(navHostController: NavHostController, viewModel: UserViewModel, personViewModel: PersonViewModel) {
     NavHost(navController = navHostController, startDestination = Routes.Home.route){
         composable(Routes.Home.route){
-            PersonData(navHostController, viewModel)
+            PersonData(navHostController, personViewModel)
         }
-        composable(Routes.PersonDetails.route){
-            val personId = it.arguments?.getString("personId")?.toInt() ?: return@composable
+//        composable(Routes.PersonDetails.route){
+//            val personId = it.arguments?.getString("personId")?.toInt() ?: return@composable
+//            val person = viewModel.getPersonById(personId!!)
+//            PersonDetail(person)
+//        }
 
-//            val personId = it.arguments?.getInt("personId")
-            val person = viewModel.getPersonById(personId!!)
-            PersonDetail(person)
+        composable(Routes.PersonDetails.route) {
+            val personId = it.arguments?.getString("personId")?.toInt() ?: return@composable
+//            val person = personViewModel.getPersonById(personId)
+            PersonDetail(personId, personViewModel)
         }
 
     }
