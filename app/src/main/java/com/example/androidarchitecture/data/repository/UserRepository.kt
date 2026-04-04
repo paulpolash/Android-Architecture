@@ -21,10 +21,10 @@ class UserRepository(private val dao: UserDao) {
         return apiService.createPost(createPostRequest)
     }
 
-//    val users: List<Users> = dao.getAllUsers()
-//    suspend fun getInsertedData(): List<Users>{
-//        return users
-//    }
+    val users: List<Users> = dao.getAllUsers()
+    suspend fun getInsertedData(): List<Users>{
+        return users
+    }
 //    val persons: List<Person> = dao.getAllPerson()
     suspend fun getPersonData(): List<Person>{
         val persons: List<Person> = emptyList()
