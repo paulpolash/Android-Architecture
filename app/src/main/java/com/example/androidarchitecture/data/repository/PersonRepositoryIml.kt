@@ -1,5 +1,6 @@
 package com.example.androidarchitecture.data.repository
 
+import android.util.Log
 import com.example.androidarchitecture.data.local.UserDao
 import com.example.androidarchitecture.data.model.CreatePostRequest
 import com.example.androidarchitecture.data.model.PersonDbData
@@ -16,14 +17,16 @@ class PersonRepositoryIml(
     private val apiService: ApiService
 ): PersonRepository {
     override suspend fun getPersons(): Result<List<PersonEntity>> {
-        TODO("Not yet implemented")
-//        return when (val localResult = dao.getAllNewPerson()) {
-//            is Success -> localResult
-//            is Error -> apiService.getPersons().map { it.toDomain() }
-//            else -> {
+        return when (val localResult = dao.getAllNewPerson()) {
+            is Result.Success<*> ->{
+                localResult
+            }
+            is Error -> apiService.getPersons().map { it.toDomain() }
+            else -> {
 //                Result.Error(Exception("Unknown error"))
-//            }
-//        } as Result<List<PersonEntity>>
+                Log.d("TAG", "Unknown error")
+            }
+        } as Result<List<PersonEntity>>
 
     }
     override suspend fun createPost(createPostRequest: CreatePostRequest): Response {

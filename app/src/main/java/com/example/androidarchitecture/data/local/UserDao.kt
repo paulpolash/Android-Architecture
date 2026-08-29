@@ -22,6 +22,6 @@ interface UserDao {
 //    fun getAllPerson(): List<Person>
 
     @Query("SELECT * FROM Person")
-    fun getAllNewPerson(): Flow<List<PersonDbData>>
+    fun getAllNewPerson(): List<PersonDbData>
 
 }
