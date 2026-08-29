@@ -19,16 +19,15 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.androidarchitecture.data.model.Person
+import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.ui.navigation.Routes
 import com.example.androidarchitecture.ui.viewModel.PersonViewModel
-import com.example.androidarchitecture.ui.viewModel.UserViewModel
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonData(navHostController: NavHostController, viewModel: PersonViewModel){
@@ -52,7 +51,7 @@ fun PersonData(navHostController: NavHostController, viewModel: PersonViewModel)
 
 
 @Composable
-fun PersonHeader(person: Person, navHostController: NavHostController){
+fun PersonHeader(person: PersonDbData, navHostController: NavHostController){
         Card(
             modifier = Modifier
                 .fillMaxWidth()

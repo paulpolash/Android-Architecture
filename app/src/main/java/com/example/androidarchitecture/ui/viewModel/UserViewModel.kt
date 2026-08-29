@@ -5,12 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidarchitecture.data.local.AppDatabase
 import com.example.androidarchitecture.data.model.CreatePostRequest
-import com.example.androidarchitecture.data.model.Person
-import com.example.androidarchitecture.data.model.User
+import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.Users
 import com.example.androidarchitecture.data.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
@@ -26,8 +24,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 //    private val userRepository= UserRepository(
 //        dao = AppDatabase.getDatabase(application).userDao()
 //    )
-    private val _users = MutableLiveData<List<Person>>()
-    val users : LiveData<List<Person>> = _users
+    private val _users = MutableLiveData<List<PersonDbData>>()
+    val users : LiveData<List<PersonDbData>> = _users
 
     fun fetchData(){
         viewModelScope.launch(Dispatchers.IO) {
@@ -40,8 +38,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     private val allUsers = MutableLiveData<List<Users>>()
     val getUsers : LiveData<List<Users>> = allUsers
 
-    private val allPerson = MutableLiveData<List<Person>>()
-    val personsData : LiveData<List<Person>> = allPerson
+    private val allPerson = MutableLiveData<List<PersonDbData>>()
+    val personsData : LiveData<List<PersonDbData>> = allPerson
     fun insertAndFetchData(){
         viewModelScope.launch(Dispatchers.IO) {
             try{
@@ -56,7 +54,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         }
         }
     }
-    fun getPersonById(personId: Int): Person ?{
+    fun getPersonById(personId: Int): PersonDbData ?{
         return personsData.value?.find { it.id == personId }
     }
 

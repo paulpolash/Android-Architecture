@@ -1,11 +1,9 @@
 package com.example.androidarchitecture.data.repository
 
-import androidx.lifecycle.LiveData
 import com.example.androidarchitecture.data.local.UserDao
 import com.example.androidarchitecture.data.model.CreatePostRequest
-import com.example.androidarchitecture.data.model.Person
+import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.Response
-import com.example.androidarchitecture.data.model.Users
 import com.example.androidarchitecture.data.remote.ApiService
 import com.example.androidarchitecture.data.remote.RetrofitInstance
 import com.example.androidarchitecture.util.Result
@@ -14,20 +12,20 @@ import kotlinx.coroutines.flow.map
 
 class UserRepository(private val dao: UserDao) {
     private val apiService: ApiService = RetrofitInstance.api
-    suspend fun getUsers(): List<Person>{
+    suspend fun getUsers(): List<PersonDbData>{
         return apiService.getPersons()
     }
     suspend fun createPost(createPostRequest: CreatePostRequest): Response {
         return apiService.createPost(createPostRequest)
     }
 
-    val users: List<Users> = dao.getAllUsers()
-    suspend fun getInsertedData(): List<Users>{
-        return users
-    }
+//    val users: List<Users> = dao.getAllUsers()
+//    suspend fun getInsertedData(): List<Users>{
+//        return users
+//    }
 //    val persons: List<Person> = dao.getAllPerson()
-    suspend fun getPersonData(): List<Person>{
-        val persons: List<Person> = emptyList()
+    suspend fun getPersonData(): List<PersonDbData>{
+        val persons: List<PersonDbData> = emptyList()
         return persons
     }
     suspend fun fetchAndSaveUsers(){
@@ -35,16 +33,15 @@ class UserRepository(private val dao: UserDao) {
             val apiUsers = RetrofitInstance.api.getPersons()
             dao.insertPersonData(apiUsers)
         } catch (e: Exception) {
-            Result.Error(e.message ?: "Unknown error")
+//            Result.Error(e)
         }
-
     }
 
-    fun getNewPersonData(): Flow<List<Person>> {
+    fun getNewPersonData(): Flow<List<PersonDbData>> {
         return dao.getAllNewPerson()
     }
 
-    fun getNewPersonById(personId: Int): Flow<Person?> {
+    fun getNewPersonById(personId: Int): Flow<PersonDbData?> {
         return dao.getAllNewPerson().map { list ->
             list.find { it.id == personId }
         }

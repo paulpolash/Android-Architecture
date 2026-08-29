@@ -1,12 +1,12 @@
-package com.example.androidarchitecture.data.model
+package com.example.androidarchitecture.domain.model
 
 import androidx.room.Embedded
-import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.androidarchitecture.data.model.Address
+import com.example.androidarchitecture.data.model.Company
 
-@Entity(tableName = "Person")
-data class Person(
-    @PrimaryKey val id: Int,
+data class PersonEntity(
+    val id: Int,
     val name: String,
     val username: String,
     val email: String,

@@ -14,6 +14,7 @@ import com.example.androidarchitecture.ui.theme.AndroidArchitectureTheme
 import com.example.androidarchitecture.ui.viewModel.PersonViewModel
 import com.example.androidarchitecture.ui.viewModel.PersonViewModelFactory
 import com.example.androidarchitecture.ui.viewModel.UserViewModel
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     private lateinit var viewModel: UserViewModel
@@ -33,8 +34,9 @@ class MainActivity : ComponentActivity() {
         val personViewModel = ViewModelProvider(this, factory)
             .get(PersonViewModel::class.java)
         this.personViewModel = personViewModel
-        initVariable()
+//        initVariable()
 //        initFunctionality()
+//        delay(1000)
 
 
 //        enableEdgeToEdge()
@@ -52,6 +54,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
     private fun initFunctionality(){
 
     }

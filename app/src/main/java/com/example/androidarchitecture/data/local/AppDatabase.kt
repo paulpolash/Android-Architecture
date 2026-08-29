@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.androidarchitecture.data.model.Person
+import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.Users
 
 @Database(entities = [Users::class,
-                     Person::class], version = 2)
+                     PersonDbData::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
