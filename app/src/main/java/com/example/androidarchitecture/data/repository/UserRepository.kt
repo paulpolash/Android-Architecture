@@ -37,13 +37,13 @@ class UserRepository(private val dao: UserDao) {
         }
     }
 
-    fun getNewPersonData(): Flow<List<PersonDbData>> {
+    fun getNewPersonData(): List<PersonDbData> {
         return dao.getAllNewPerson()
     }
 
-    fun getNewPersonById(personId: Int): Flow<PersonDbData?> {
-        return dao.getAllNewPerson().map { list ->
-            list.find { it.id == personId }
-        }
-    }
+//    fun getNewPersonById(personId: Int): PersonDbData {
+//        return dao.getAllNewPerson().map { list ->
+//            list.find { it.id == personId }
+//        }
+//    }
 }

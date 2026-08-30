@@ -14,11 +14,12 @@ import com.example.androidarchitecture.util.Result.Success
 
 class PersonRepositoryIml(
     private val dao: UserDao,
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val localDataSource: PersonLocalDataSource,
 ): PersonRepository {
     override suspend fun getPersons(): Result<List<PersonEntity>> {
-        return when (val localResult = dao.getAllNewPerson()) {
-            is Result.Success<*> ->{
+        return when (val localResult = localDataSource.getPersons()) {
+            is Result.Success ->{
                 localResult
             }
             is Error -> apiService.getPersons().map { it.toDomain() }
