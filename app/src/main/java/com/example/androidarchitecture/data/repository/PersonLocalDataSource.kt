@@ -4,6 +4,7 @@ import android.ranging.DataNotificationConfig
 import com.example.androidarchitecture.data.local.UserDao
 import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.PersonRemoteData
+import com.example.androidarchitecture.data.model.toData
 import com.example.androidarchitecture.data.model.toDomain
 import com.example.androidarchitecture.domain.model.PersonEntity
 import com.example.androidarchitecture.util.Result
@@ -22,8 +23,10 @@ class PersonLocalDataSource(
         })
     }
 
-    override suspend fun savePersons(personList: List<PersonRemoteData>) {
-        personDao.insertPersonData(personList)
+    override suspend fun savePersons(personList: List<PersonEntity>) {
+        personDao.insertPersonData(
+            personList.map { it.toData() }
+        )
     }
 
     override suspend fun getAllUser(): Flow<List<PersonDbData>> {

@@ -28,7 +28,7 @@ class PersonRepositoryIml(
                 when (val remoteResult = remoteDataSource.getPersons()) {
                     is Result.Success -> {
                         //save to local
-                        localDataSource.savePersons(remoteResult.data)
+                        localDataSource.savePersons(remoteResult.data.map { it.toDomain() })
                         //read again from local
                         localDataSource.getPersons()
                     }

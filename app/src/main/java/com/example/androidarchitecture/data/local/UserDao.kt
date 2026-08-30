@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.PersonRemoteData
+import com.example.androidarchitecture.domain.model.PersonEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,7 +18,7 @@ interface UserDao {
 //    fun getAllUsers():List<Users>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPersonData(person: List<PersonRemoteData>)
+    suspend fun insertPersonData(person: List<PersonEntity>)
 
 //    @Query("SELECT * FROM Person")
 //    fun getAllPerson(): List<Person>
