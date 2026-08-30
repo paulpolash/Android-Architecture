@@ -5,6 +5,7 @@ import com.example.androidarchitecture.data.local.UserDao
 import com.example.androidarchitecture.data.model.CreatePostRequest
 import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.Response
+import com.example.androidarchitecture.data.model.toData
 import com.example.androidarchitecture.data.model.toDomain
 import com.example.androidarchitecture.data.remote.ApiService
 import com.example.androidarchitecture.domain.model.PersonEntity
@@ -13,18 +14,31 @@ import com.example.androidarchitecture.util.Result
 import com.example.androidarchitecture.util.Result.Success
 
 class PersonRepositoryIml(
-    private val dao: UserDao,
-    private val apiService: ApiService,
     private val localDataSource: PersonLocalDataSource,
+    private val remoteDataSource: PersonRemoteDataSource
 ): PersonRepository {
     override suspend fun getPersons(): Result<List<PersonEntity>> {
+        //check local first
         return when (val localResult = localDataSource.getPersons()) {
             is Result.Success ->{
                 localResult
             }
-            is Error -> apiService.getPersons().map { it.toDomain() }
+            is Result.Error -> {
+                //local is empty call remote and save to local
+                when (val remoteResult = remoteDataSource.getPersons()) {
+                    is Result.Success -> {
+                        //save to local
+                        localDataSource.savePersons(remoteResult.data)
+                        //read again from local
+                        localDataSource.getPersons()
+                    }
+                    is Result.Error -> {
+                        remoteResult
+                    }
+
+                }
+            }
             else -> {
-//                Result.Error(Exception("Unknown error"))
                 Log.d("TAG", "Unknown error")
             }
         } as Result<List<PersonEntity>>

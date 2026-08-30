@@ -3,6 +3,7 @@ package com.example.androidarchitecture.data.repository
 import com.example.androidarchitecture.data.local.UserDao
 import com.example.androidarchitecture.data.model.CreatePostRequest
 import com.example.androidarchitecture.data.model.PersonDbData
+import com.example.androidarchitecture.data.model.PersonRemoteData
 import com.example.androidarchitecture.data.model.Response
 import com.example.androidarchitecture.data.remote.ApiService
 import com.example.androidarchitecture.data.remote.RetrofitInstance
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.map
 
 class UserRepository(private val dao: UserDao) {
     private val apiService: ApiService = RetrofitInstance.api
-    suspend fun getUsers(): List<PersonDbData>{
+    suspend fun getUsers(): List<PersonRemoteData>{
         return apiService.getPersons()
     }
     suspend fun createPost(createPostRequest: CreatePostRequest): Response {

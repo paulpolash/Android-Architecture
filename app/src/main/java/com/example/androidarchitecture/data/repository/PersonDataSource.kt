@@ -17,7 +17,7 @@ interface PersonDataSource {
 
     interface Local{
         suspend fun getPersons(): Result<List<PersonEntity>>
-        suspend fun savePersons(personList :List<PersonDbData>)
+        suspend fun savePersons(personList :List<PersonRemoteData>)
         suspend fun getAllUser(): Flow<List<PersonDbData>>
         suspend fun getNewPersonId(personId: Int): Flow<PersonDbData?>
     }

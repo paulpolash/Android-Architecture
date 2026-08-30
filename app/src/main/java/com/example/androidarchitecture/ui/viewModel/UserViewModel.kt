@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.androidarchitecture.data.local.AppDatabase
 import com.example.androidarchitecture.data.model.CreatePostRequest
 import com.example.androidarchitecture.data.model.PersonDbData
+import com.example.androidarchitecture.data.model.PersonRemoteData
 import com.example.androidarchitecture.data.model.Users
 import com.example.androidarchitecture.data.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
@@ -24,8 +25,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 //    private val userRepository= UserRepository(
 //        dao = AppDatabase.getDatabase(application).userDao()
 //    )
-    private val _users = MutableLiveData<List<PersonDbData>>()
-    val users : LiveData<List<PersonDbData>> = _users
+    private val _users = MutableLiveData<List<PersonRemoteData>>()
+    val users : LiveData<List<PersonRemoteData>> = _users
 
     fun fetchData(){
         viewModelScope.launch(Dispatchers.IO) {
