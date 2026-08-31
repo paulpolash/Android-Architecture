@@ -32,7 +32,7 @@ import com.example.androidarchitecture.ui.viewModel.PersonViewModel
 @Composable
 fun PersonData(navHostController: NavHostController, viewModel: PersonViewModel){
 //    val state by viewModel.personsData.observeAsState(emptyList())//it will be used when we use UserViewModel
-    val state by viewModel.personsData.collectAsState(emptyList())
+//    val state by viewModel.personsData.collectAsState(emptyList())
     Scaffold(
         topBar = {
             TopAppBar(
@@ -42,12 +42,12 @@ fun PersonData(navHostController: NavHostController, viewModel: PersonViewModel)
     ) { innerPadding ->
         Text(text = "Person Data")
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
-            items(state) { person ->
-                PersonHeader(person, navHostController)
+//            items(state) { person ->
+//                PersonHeader(person, navHostController)
             }
         }
     }
-}
+//}
 
 
 @Composable
@@ -78,7 +78,7 @@ fun PersonHeader(person: PersonDbData, navHostController: NavHostController){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonDetail( personId: Int, personViewModel: PersonViewModel){
-    val person by personViewModel.getPersonById(personId).collectAsState()
+//    val person by personViewModel.getPersonById(personId).collectAsState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -92,11 +92,11 @@ fun PersonDetail( personId: Int, personViewModel: PersonViewModel){
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                Log.d("detail", person?.name.toString())
-                Text(text = "Name: "+ person?.name, color = Color.Black)
-                Text(text = "Username: "+ person?.username, color = Color.Black)
-                Text(text = "Email: "+ person?.email, color = Color.Black)
-                Text(text = "Address: "+ person?.address.toString(), color = Color.Black)
+//                Log.d("detail", person?.name.toString())
+//                Text(text = "Name: "+ person?.name, color = Color.Black)
+//                Text(text = "Username: "+ person?.username, color = Color.Black)
+//                Text(text = "Email: "+ person?.email, color = Color.Black)
+//                Text(text = "Address: "+ person?.address.toString(), color = Color.Black)
             }
         }
 

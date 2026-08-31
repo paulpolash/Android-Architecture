@@ -32,7 +32,7 @@ class UserRepository(private val dao: UserDao) {
     suspend fun fetchAndSaveUsers(){
         try {
             val apiUsers = RetrofitInstance.api.getPersons()
-            dao.insertPersonData(apiUsers)
+//            dao.insertPersonData(apiUsers)
         } catch (e: Exception) {
 //            Result.Error(e)
         }

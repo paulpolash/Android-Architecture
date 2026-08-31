@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
 class PersonViewModel(private val personRepository: UserRepository) : ViewModel() {
-    val personsData: StateFlow<List<PersonDbData>> = personRepository.getNewPersonData()
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            emptyList()
-        )
+//    val personsData: StateFlow<List<PersonDbData>> = personRepository.getNewPersonData()
+//        .stateIn(
+//            viewModelScope,
+//            SharingStarted.WhileSubscribed(5000),
+//            emptyList()
+//        )
 
-    fun getPersonById(personId: Int): StateFlow<PersonDbData?> {
-        return personRepository.getNewPersonById(personId)
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
-    }
+//    fun getPersonById(personId: Int): StateFlow<PersonDbData?> {
+//        return personRepository.getNewPersonById(personId)
+//            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+//    }
 }

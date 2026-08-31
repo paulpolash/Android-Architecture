@@ -24,7 +24,7 @@ fun PersonData.toDomain() = PersonEntity (
     company = this.company,
 )
 
-fun PersonEntity.toData() = PersonEntity(
+fun PersonEntity.toData() = PersonDbData(
     id = this.id,
     name = this.name,
     username = this.username,
