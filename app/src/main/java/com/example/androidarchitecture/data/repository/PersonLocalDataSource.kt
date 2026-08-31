@@ -9,18 +9,22 @@ import com.example.androidarchitecture.data.model.toDomain
 import com.example.androidarchitecture.domain.model.PersonEntity
 import com.example.androidarchitecture.util.Result
 import com.example.androidarchitecture.util.map
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 class PersonLocalDataSource(
     private val personDao: UserDao
 ): PersonDataSource.Local {
     override suspend fun getPersons(): Result<List<PersonEntity>> {
-        val persons = personDao.getAllNewPerson()
-        return (if (persons.isNotEmpty()) {
-            Result.Success(persons.map { it.toDomain() })
-        } else {
-            Result.Error(Exception("Data not available"))
-        })
+        return withContext(Dispatchers.IO) {
+            val persons = personDao.getAllNewPerson()
+            (if (persons.isNotEmpty()) {
+                Result.Success(persons.map { it.toDomain() })
+            } else {
+                Result.Error(Exception("Data not available"))
+            })
+        }
     }
 
     override suspend fun savePersons(personList: List<PersonEntity>) {

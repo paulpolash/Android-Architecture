@@ -1,7 +1,6 @@
 package com.example.androidarchitecture.data.repository
 
 import com.example.androidarchitecture.data.model.CreatePostRequest
-import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.PersonRemoteData
 import com.example.androidarchitecture.data.model.Response
 import com.example.androidarchitecture.data.remote.ApiService

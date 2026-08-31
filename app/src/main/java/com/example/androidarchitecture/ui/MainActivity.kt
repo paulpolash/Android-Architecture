@@ -7,7 +7,12 @@ import androidx.activity.compose.setContent
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.example.androidarchitecture.data.local.AppDatabase
+import com.example.androidarchitecture.data.remote.RetrofitInstance
+import com.example.androidarchitecture.data.repository.PersonLocalDataSource
+import com.example.androidarchitecture.data.repository.PersonRemoteDataSource
+import com.example.androidarchitecture.data.repository.PersonRepositoryIml
 import com.example.androidarchitecture.data.repository.UserRepository
+import com.example.androidarchitecture.domain.usecase.GetPersonData
 import com.example.androidarchitecture.ui.navigation.NavGraph
 import com.example.androidarchitecture.ui.screen.PersonData
 import com.example.androidarchitecture.ui.theme.AndroidArchitectureTheme
@@ -29,17 +34,23 @@ class MainActivity : ComponentActivity() {
 //            .get(PersonViewModel::class.java)
         val database = AppDatabase.getDatabase(applicationContext) // use application
         val userDao = database.userDao()
-        val repository = UserRepository(userDao)
-        val factory = PersonViewModelFactory(repository)
-        val personViewModel = ViewModelProvider(this, factory)
-            .get(PersonViewModel::class.java)
+        val localDataSource = PersonLocalDataSource(userDao)
+        val apiService = RetrofitInstance.api
+        val remoteDataSource = PersonRemoteDataSource(apiService)
+        val personRepository = PersonRepositoryIml(localDataSource, remoteDataSource)
+        val personData = GetPersonData(personRepository)
+        val personViewModel = PersonViewModel(personData)
+
+//        val repository = UserRepository(userDao)
+        val factory = PersonViewModelFactory(personData)
+//        val personViewModel = ViewModelProvider(this, factory)
+//            .get(PersonViewModel::class.java)
         this.personViewModel = personViewModel
 //        initVariable()
 //        initFunctionality()
 //        delay(1000)
+        Log.e("check_data", personViewModel.getPersons().toString())
 
-
-//        enableEdgeToEdge()
         setContent {
             AndroidArchitectureTheme {
                 val navHostController = rememberNavController()
