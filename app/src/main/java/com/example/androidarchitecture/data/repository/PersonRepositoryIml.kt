@@ -40,6 +40,6 @@ class PersonRepositoryIml(
 
     }
     override suspend fun createPost(createPostRequest: CreatePostRequest): Response {
-        TODO("Not yet implemented")
+        return remoteDataSource.savePerson(createPostRequest)
     }
 }

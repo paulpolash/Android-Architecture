@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
 //        initVariable()
 //        initFunctionality()
 //        delay(1000)
-        Log.e("check_data", personViewModel.getPersons().toString())
+        Log.e("check_data", personViewModel.insertPerson().toString())
 
         setContent {
             AndroidArchitectureTheme {

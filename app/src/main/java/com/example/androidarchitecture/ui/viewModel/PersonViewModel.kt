@@ -3,7 +3,9 @@ package com.example.androidarchitecture.ui.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.androidarchitecture.data.model.CreatePostRequest
 import com.example.androidarchitecture.data.model.PersonDbData
+import com.example.androidarchitecture.data.model.Response
 import com.example.androidarchitecture.data.repository.UserRepository
 import com.example.androidarchitecture.domain.model.PersonEntity
 import com.example.androidarchitecture.domain.usecase.GetPersonData
@@ -49,5 +51,17 @@ class PersonViewModel(private val getPersonData: GetPersonData) : ViewModel() {
     }
     fun getPersonById(id: Int): PersonEntity? {
         return personsData.value.find { it.id == id }
+    }
+    fun insertPerson(): Response{
+        var data = Response("");
+        viewModelScope.launch {
+            val createPost = CreatePostRequest(
+                userId = 1,
+                title = "Sample Title",
+                body = "Sample Body"
+            )
+            data = getPersonData.insertPerson(createPost)
+        }
+        return data
     }
 }
