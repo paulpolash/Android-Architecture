@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.androidarchitecture.data.model.PersonDbData
+import com.example.androidarchitecture.data.model.toData
 import com.example.androidarchitecture.ui.navigation.Routes
 import com.example.androidarchitecture.ui.viewModel.PersonViewModel
 
@@ -32,7 +33,8 @@ import com.example.androidarchitecture.ui.viewModel.PersonViewModel
 @Composable
 fun PersonData(navHostController: NavHostController, viewModel: PersonViewModel){
 //    val state by viewModel.personsData.observeAsState(emptyList())//it will be used when we use UserViewModel
-//    val state by viewModel.personsData.collectAsState(emptyList())
+    val state by viewModel.uiState.collectAsState()
+//    val state by viewModel.personsData.collectAsState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -42,12 +44,12 @@ fun PersonData(navHostController: NavHostController, viewModel: PersonViewModel)
     ) { innerPadding ->
         Text(text = "Person Data")
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
-//            items(state) { person ->
-//                PersonHeader(person, navHostController)
+            items(state.persons) { person ->
+                PersonHeader(person.toData(), navHostController)
             }
         }
     }
-//}
+}
 
 
 @Composable

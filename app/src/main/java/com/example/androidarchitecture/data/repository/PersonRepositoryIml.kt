@@ -44,6 +44,11 @@ class PersonRepositoryIml(
         } as Result<List<PersonEntity>>
 
     }
+
+    override suspend fun getPersonById(id: Int): Result<PersonEntity> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun createPost(createPostRequest: CreatePostRequest): Response {
         TODO("Not yet implemented")
     }

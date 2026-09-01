@@ -35,14 +35,14 @@ fun PersonData(
         modifier = Modifier.fillMaxSize()
     ) {
 
-//        when {
+        when {
 //            uiState.isLoading -> {
 //
 //                CircularProgressIndicator(
 //                    modifier = Modifier.align(Alignment.Center)
 //                )
 //            }
-//
+
 //            uiState.error != null -> {
 //
 //                Text(
@@ -50,12 +50,12 @@ fun PersonData(
 //                    modifier = Modifier.align(Alignment.Center)
 //                )
 //            }
-//
-//            else -> {
-//
-//                LazyColumn(
-//                    modifier = Modifier.fillMaxSize()
-//                ) {
+
+            else -> {
+
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
 //                    items(
 //                        items = uiState.persons,
 //                        key = { person -> person.id }
@@ -63,9 +63,9 @@ fun PersonData(
 //
 //                        PersonItem(person)
 //                    }
-//                }
-//            }
-//        }
+                }
+            }
+        }
     }
 }
 
