@@ -1,20 +1,17 @@
 package com.example.androidarchitecture.data.repository
 
-import android.ranging.DataNotificationConfig
-import com.example.androidarchitecture.data.local.UserDao
+import com.example.androidarchitecture.data.local.PersonDao
 import com.example.androidarchitecture.data.model.PersonDbData
-import com.example.androidarchitecture.data.model.PersonRemoteData
 import com.example.androidarchitecture.data.model.toData
 import com.example.androidarchitecture.data.model.toDomain
 import com.example.androidarchitecture.domain.model.PersonEntity
 import com.example.androidarchitecture.util.Result
-import com.example.androidarchitecture.util.map
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class PersonLocalDataSource(
-    private val personDao: UserDao
+    private val personDao: PersonDao
 ): PersonDataSource.Local {
     override suspend fun getPersons(): Result<List<PersonEntity>> {
         return withContext(Dispatchers.IO) {

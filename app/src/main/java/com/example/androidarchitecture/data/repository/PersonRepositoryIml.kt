@@ -1,17 +1,12 @@
 package com.example.androidarchitecture.data.repository
 
 import android.util.Log
-import com.example.androidarchitecture.data.local.UserDao
 import com.example.androidarchitecture.data.model.CreatePostRequest
-import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.Response
-import com.example.androidarchitecture.data.model.toData
 import com.example.androidarchitecture.data.model.toDomain
-import com.example.androidarchitecture.data.remote.ApiService
 import com.example.androidarchitecture.domain.model.PersonEntity
 import com.example.androidarchitecture.domain.repository.PersonRepository
 import com.example.androidarchitecture.util.Result
-import com.example.androidarchitecture.util.Result.Success
 
 class PersonRepositoryIml(
     private val localDataSource: PersonLocalDataSource,
@@ -44,11 +39,6 @@ class PersonRepositoryIml(
         } as Result<List<PersonEntity>>
 
     }
-
-    override suspend fun getPersonById(id: Int): Result<PersonEntity> {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun createPost(createPostRequest: CreatePostRequest): Response {
         TODO("Not yet implemented")
     }

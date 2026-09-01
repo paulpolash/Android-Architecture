@@ -1,7 +1,9 @@
 package com.example.androidarchitecture.ui.screen
 
+import android.R
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -43,7 +45,7 @@ fun PersonData(navHostController: NavHostController, viewModel: PersonViewModel)
         }
     ) { innerPadding ->
         Text(text = "Person Data")
-        LazyColumn(modifier = Modifier.padding(innerPadding)) {
+        LazyColumn(modifier = Modifier.padding(innerPadding).background(color = Color.LightGray)) {
             items(state.persons) { person ->
                 PersonHeader(person.toData(), navHostController)
             }
@@ -58,6 +60,7 @@ fun PersonHeader(person: PersonDbData, navHostController: NavHostController){
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
+                .background(color = Color.White)
                 .clip(RoundedCornerShape(12.dp)),
             onClick = {
                 Log.d("Person", person.name)
@@ -67,6 +70,7 @@ fun PersonHeader(person: PersonDbData, navHostController: NavHostController){
             Column (
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(color = Color.White)
                     .padding(12.dp)
             ){
                 Text(text = "Name: "+person.name, color = Color.Black)
@@ -80,7 +84,7 @@ fun PersonHeader(person: PersonDbData, navHostController: NavHostController){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonDetail( personId: Int, personViewModel: PersonViewModel){
-//    val person by personViewModel.getPersonById(personId).collectAsState()
+    val person = personViewModel.getPersonById(personId)
     Scaffold(
         topBar = {
             TopAppBar(
@@ -92,13 +96,14 @@ fun PersonDetail( personId: Int, personViewModel: PersonViewModel){
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(color = Color.White)
                     .padding(16.dp)
             ) {
-//                Log.d("detail", person?.name.toString())
-//                Text(text = "Name: "+ person?.name, color = Color.Black)
-//                Text(text = "Username: "+ person?.username, color = Color.Black)
-//                Text(text = "Email: "+ person?.email, color = Color.Black)
-//                Text(text = "Address: "+ person?.address.toString(), color = Color.Black)
+                Log.d("detail", person?.name.toString())
+                Text(text = "Name: "+ person?.name, color = Color.Black)
+                Text(text = "Username: "+ person?.username, color = Color.Black)
+                Text(text = "Email: "+ person?.email, color = Color.Black)
+                Text(text = "Address: "+ person?.address.toString(), color = Color.Black)
             }
         }
 

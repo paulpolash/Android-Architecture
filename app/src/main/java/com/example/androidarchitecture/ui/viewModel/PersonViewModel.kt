@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.repository.UserRepository
+import com.example.androidarchitecture.domain.model.PersonEntity
 import com.example.androidarchitecture.domain.usecase.GetPersonData
 import com.example.androidarchitecture.ui.screen.PersonUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +17,8 @@ import kotlinx.coroutines.launch
 class PersonViewModel(private val getPersonData: GetPersonData) : ViewModel() {
     private val _uiState = MutableStateFlow(PersonUiState())
     val uiState: StateFlow<PersonUiState> = _uiState
+    private val _personsData = MutableStateFlow<List<PersonEntity>>(emptyList())
+    val personsData: StateFlow<List<PersonEntity>> = _personsData
     fun getPersons() {
         viewModelScope.launch {
 
@@ -27,6 +30,7 @@ class PersonViewModel(private val getPersonData: GetPersonData) : ViewModel() {
                 is com.example.androidarchitecture.util.Result.Success -> {
                     // update state
                     Log.e("check_data", result.data.toString())
+                    _personsData.value = result.data
                     _uiState.value = PersonUiState(
                         persons = result.data
                     )
@@ -42,5 +46,8 @@ class PersonViewModel(private val getPersonData: GetPersonData) : ViewModel() {
 //            val result = getPersonData()
 
         }
+    }
+    fun getPersonById(id: Int): PersonEntity? {
+        return personsData.value.find { it.id == id }
     }
 }

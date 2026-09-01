@@ -5,11 +5,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.androidarchitecture.data.model.PersonDbData
-import com.example.androidarchitecture.data.model.PersonRemoteData
-import com.example.androidarchitecture.domain.model.PersonEntity
 
 @Dao
-interface UserDao {
+interface PersonDao {
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertUsers(users: List<Users>)
 //

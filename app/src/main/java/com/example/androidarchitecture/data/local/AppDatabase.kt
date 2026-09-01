@@ -10,7 +10,7 @@ import com.example.androidarchitecture.data.model.Users
 @Database(entities = [Users::class,
                      PersonDbData::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao(): UserDao
+    abstract fun userDao(): PersonDao
 
     companion object {
         @Volatile

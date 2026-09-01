@@ -8,6 +8,5 @@ import com.example.androidarchitecture.util.Result
 
 interface PersonRepository {
     suspend fun getPersons(): Result<List<PersonEntity>>
-    suspend fun getPersonById(id: Int): Result<PersonEntity>
     suspend fun createPost(createPostRequest: CreatePostRequest): Response
 }

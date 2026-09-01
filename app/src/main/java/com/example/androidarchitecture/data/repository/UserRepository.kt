@@ -1,17 +1,14 @@
 package com.example.androidarchitecture.data.repository
 
-import com.example.androidarchitecture.data.local.UserDao
+import com.example.androidarchitecture.data.local.PersonDao
 import com.example.androidarchitecture.data.model.CreatePostRequest
 import com.example.androidarchitecture.data.model.PersonDbData
 import com.example.androidarchitecture.data.model.PersonRemoteData
 import com.example.androidarchitecture.data.model.Response
 import com.example.androidarchitecture.data.remote.ApiService
 import com.example.androidarchitecture.data.remote.RetrofitInstance
-import com.example.androidarchitecture.util.Result
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
-class UserRepository(private val dao: UserDao) {
+class UserRepository(private val dao: PersonDao) {
     private val apiService: ApiService = RetrofitInstance.api
     suspend fun getUsers(): List<PersonRemoteData>{
         return apiService.getPersons()
