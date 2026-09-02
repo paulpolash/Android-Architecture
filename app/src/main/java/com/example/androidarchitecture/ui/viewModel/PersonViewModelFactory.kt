@@ -2,7 +2,6 @@ package com.example.androidarchitecture.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.androidarchitecture.data.repository.UserRepository
 import com.example.androidarchitecture.domain.usecase.GetPersonData
 
 class PersonViewModelFactory(

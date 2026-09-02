@@ -7,10 +7,9 @@ import androidx.navigation.compose.composable
 import com.example.androidarchitecture.ui.screen.PersonData
 import com.example.androidarchitecture.ui.screen.PersonDetail
 import com.example.androidarchitecture.ui.viewModel.PersonViewModel
-import com.example.androidarchitecture.ui.viewModel.UserViewModel
 
 @Composable
-fun NavGraph(navHostController: NavHostController, viewModel: UserViewModel, personViewModel: PersonViewModel) {
+fun NavGraph(navHostController: NavHostController, personViewModel: PersonViewModel) {
     NavHost(navController = navHostController, startDestination = Routes.Home.route){
         composable(Routes.Home.route){
             PersonData(navHostController, personViewModel)

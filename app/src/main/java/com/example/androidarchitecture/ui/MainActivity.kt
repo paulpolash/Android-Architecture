@@ -4,34 +4,22 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.example.androidarchitecture.data.local.AppDatabase
 import com.example.androidarchitecture.data.remote.RetrofitInstance
 import com.example.androidarchitecture.data.repository.PersonLocalDataSource
 import com.example.androidarchitecture.data.repository.PersonRemoteDataSource
 import com.example.androidarchitecture.data.repository.PersonRepositoryIml
-import com.example.androidarchitecture.data.repository.UserRepository
 import com.example.androidarchitecture.domain.usecase.GetPersonData
 import com.example.androidarchitecture.ui.navigation.NavGraph
-import com.example.androidarchitecture.ui.screen.PersonData
 import com.example.androidarchitecture.ui.theme.AndroidArchitectureTheme
 import com.example.androidarchitecture.ui.viewModel.PersonViewModel
 import com.example.androidarchitecture.ui.viewModel.PersonViewModelFactory
-import com.example.androidarchitecture.ui.viewModel.UserViewModel
-import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
-    private lateinit var viewModel: UserViewModel
     private lateinit var personViewModel: PersonViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[UserViewModel::class.java]
-//        val factory = PersonViewModelFactory(userRepository = viewModel.userRepository)
-//        val personViewModel = ViewModelProvider(this, factory)
-//            .get(PersonViewModel::class.java)
         val database = AppDatabase.getDatabase(applicationContext) // use application
         val userDao = database.userDao()
         val localDataSource = PersonLocalDataSource(userDao)
@@ -41,20 +29,17 @@ class MainActivity : ComponentActivity() {
         val personData = GetPersonData(personRepository)
         val personViewModel = PersonViewModel(personData)
 
-//        val repository = UserRepository(userDao)
         val factory = PersonViewModelFactory(personData)
-//        val personViewModel = ViewModelProvider(this, factory)
-//            .get(PersonViewModel::class.java)
         this.personViewModel = personViewModel
-//        initVariable()
-//        initFunctionality()
-//        delay(1000)
-        Log.e("check_data", personViewModel.insertPerson().toString())
+
+        personViewModel.getPersons()
+        personViewModel.insertPerson()
+//        Log.e("check_data", personViewModel.insertPerson().toString())
 
         setContent {
             AndroidArchitectureTheme {
                 val navHostController = rememberNavController()
-                NavGraph(navHostController = navHostController, viewModel = viewModel, personViewModel = personViewModel)
+                NavGraph(navHostController = navHostController, personViewModel = personViewModel)
 //                PersonData(viewModel)
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    Greeting(
@@ -65,43 +50,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-    private fun initFunctionality(){
-
-    }
-    private fun initVariable() {
-        viewModel = ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[UserViewModel::class.java]
-//        viewModel.users.observe(this) { users ->
-//            users.forEach{
-//                Log.d("TAG", it.name+" - "+it.email)
-//            }
-//        }
-//        viewModel.fetchData()
-//        viewModel.createPost()
-
-//        viewModel.getUsers.observe(this){data->
-//            data.forEach{
-//                Log.d("Data", it.name)
-//                PersonData(person = it)
-//            }
-//        }
-        viewModel.insertAndFetchData()
-    }
 }
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    AndroidArchitectureTheme {
-//        Greeting("Android")
-//    }
-//}
