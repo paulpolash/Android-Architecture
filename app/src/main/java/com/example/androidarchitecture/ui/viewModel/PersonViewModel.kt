@@ -13,8 +13,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class PersonViewModel(private val getPersonData: GetPersonData) : ViewModel() {
+class PersonViewModel @Inject constructor (private val getPersonData: GetPersonData) : ViewModel() {
     private val _uiState = MutableStateFlow(PersonUiState())
     val uiState: StateFlow<PersonUiState> = _uiState
     private val _personsData = MutableStateFlow<List<PersonEntity>>(emptyList())

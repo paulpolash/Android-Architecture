@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
         this.personViewModel = personViewModel
 
         personViewModel.getPersons()
-        personViewModel.insertPerson()
+//        personViewModel.insertPerson()
 //        Log.e("check_data", personViewModel.insertPerson().toString())
 
         setContent {

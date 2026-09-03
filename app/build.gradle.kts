@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("kotlin-kapt")
+//    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -64,11 +66,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Room components
-    implementation ("androidx.room:room-runtime:2.6.1")
-    annotationProcessor ("androidx.room:room-compiler:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
-    implementation ("androidx.room:room-ktx:2.6.1")
+//    implementation ("androidx.room:room-runtime:2.6.1")
+//    annotationProcessor ("androidx.room:room-compiler:2.6.1")
+//    kapt ("androidx.room:room-compiler:2.6.1")
+//    implementation ("androidx.room:room-ktx:2.6.1")
 
+    implementation("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
     // Core Retrofit library
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
 
@@ -77,4 +82,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    implementation("com.google.dagger:hilt-android:2.57.1")
+    ksp("com.google.dagger:hilt-compiler:2.57.1")
 }
