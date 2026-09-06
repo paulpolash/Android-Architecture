@@ -7,8 +7,9 @@ import com.example.androidarchitecture.data.model.toDomain
 import com.example.androidarchitecture.domain.model.PersonEntity
 import com.example.androidarchitecture.domain.repository.PersonRepository
 import com.example.androidarchitecture.util.Result
+import javax.inject.Inject
 
-class PersonRepositoryIml(
+class PersonRepositoryIml @Inject constructor(
     private val localDataSource: PersonLocalDataSource,
     private val remoteDataSource: PersonRemoteDataSource
 ): PersonRepository {

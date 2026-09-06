@@ -9,8 +9,9 @@ import com.example.androidarchitecture.util.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class PersonLocalDataSource(
+class PersonLocalDataSource @Inject constructor(
     private val personDao: PersonDao
 ): PersonDataSource.Local {
     override suspend fun getPersons(): Result<List<PersonEntity>> {

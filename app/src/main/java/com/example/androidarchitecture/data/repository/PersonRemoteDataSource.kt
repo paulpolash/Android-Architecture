@@ -5,8 +5,9 @@ import com.example.androidarchitecture.data.model.PersonRemoteData
 import com.example.androidarchitecture.data.model.Response
 import com.example.androidarchitecture.data.remote.ApiService
 import com.example.androidarchitecture.util.Result
+import javax.inject.Inject
 
-class PersonRemoteDataSource(
+class PersonRemoteDataSource @Inject constructor(
     private val personService: ApiService
 ): PersonDataSource.Remote {
     override suspend fun getPersons(): Result<List<PersonRemoteData>>  {
