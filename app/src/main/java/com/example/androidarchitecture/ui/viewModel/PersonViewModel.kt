@@ -8,6 +8,7 @@ import com.example.androidarchitecture.data.model.Response
 import com.example.androidarchitecture.domain.model.PersonEntity
 import com.example.androidarchitecture.domain.usecase.GetPersonData
 import com.example.androidarchitecture.ui.screen.PersonUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@HiltViewModel
 class PersonViewModel @Inject constructor (private val getPersonData: GetPersonData) : ViewModel() {
     private val _uiState = MutableStateFlow(PersonUiState())
     val uiState: StateFlow<PersonUiState> = _uiState
